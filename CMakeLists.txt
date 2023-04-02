@@ -4,5 +4,5 @@ project(MyProject)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-add_executable(MyProject src/main.cpp)
 include_directories(lib/stb)
+add_executable(MyProject src/main.cpp src/images.cpp src/images.h)

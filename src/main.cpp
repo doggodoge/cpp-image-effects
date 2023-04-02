@@ -1,32 +1,19 @@
 #include <cstdio>
 #include <cstdlib>
-#include <memory>
 
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+#include "images.h"
 
-using ImagePtr = std::unique_ptr<uint8_t[],
-                                 decltype(&stbi_image_free)>;
+int main() {
+    Image image = load_image("example.png");
 
-int main()
-{
-  int width;
-  int height;
-  int channels;
+    if (!image.data) {
+        fprintf(stderr, "Failed to load image.\n");
+        return EXIT_FAILURE;
+    }
 
-  ImagePtr image(stbi_load("example.png", &width, &height, &channels, 0),
-                 &stbi_image_free);
+    for (int i = 0; i < image.width * image.height * image.channels; i++) {
+        printf("%d ", image.data[i]);
+    }
 
-  if (!image)
-  {
-    fprintf(stderr, "Failed to load image.\n");
-    return EXIT_FAILURE;
-  }
-
-  for (int i = 0; i < width * height * channels; i++)
-  {
-    printf("%d ", image[i]);
-  }
-
-  return EXIT_SUCCESS;
+    return EXIT_SUCCESS;
 }
