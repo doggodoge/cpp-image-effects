@@ -1,7 +1,3 @@
-//
-// Created by gmoore on 02/04/23.
-//
-
 #ifndef MYPROJECT_IMAGES_H
 #define MYPROJECT_IMAGES_H
 
@@ -10,15 +6,24 @@
 
 #include "stb_image.h"
 
-using ImagePtr = std::unique_ptr<uint8_t[], decltype(&stbi_image_free)>;
+namespace images {
+    using ImagePtr = std::unique_ptr<uint8_t[], decltype(&stbi_image_free)>;
 
-typedef struct Image {
-    int width;
-    int height;
-    int channels;
-    ImagePtr data;
-} Image;
+    class Image {
+    public:
+        int width;
+        int height;
+        int channels;
+        ImagePtr data;
 
-Image load_image(std::string const &path);
+        Image(int width, int height, int channels, ImagePtr data) : width(width), height(height), channels(channels),
+                                                                    data(std::move(data)) {}
+
+        static Image load(std::string const &path);
+
+        void save(std::string const &path) const;
+
+    };
+}
 
 #endif //MYPROJECT_IMAGES_H

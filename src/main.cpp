@@ -2,18 +2,18 @@
 #include <cstdlib>
 
 #include "images.h"
+#include "effects.h"
 
 int main() {
-    Image image = load_image("example.png");
+    images::Image image = images::Image::load("example.png");
 
     if (!image.data) {
         fprintf(stderr, "Failed to load image.\n");
         return EXIT_FAILURE;
     }
 
-    for (int i = 0; i < image.width * image.height * image.channels; i++) {
-        printf("%d ", image.data[i]);
-    }
+    // blur the image
+    effects::blur(image, 10).save("blurred.png");
 
     return EXIT_SUCCESS;
 }
