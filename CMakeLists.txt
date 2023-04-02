@@ -2,12 +2,10 @@ cmake_minimum_required(VERSION 3.10)
 
 project(MyProject)
 
-# Add the source files for the project
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 add_executable(MyProject src/main.cpp)
 
-# Set the include directories for the project
-target_include_directories(MyProject PRIVATE lib)
-
-# Add the stb library to the project
-target_link_libraries(MyProject PRIVATE lib/stb)
-
+add_library(stb INTERFACE)
+target_include_directories(stb INTERFACE lib/stb)
+target_link_libraries(MyProject stb)
