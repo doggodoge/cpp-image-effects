@@ -1,4 +1,6 @@
-# Cpp Image Effects
+Archived on GitHub and moved to https://git.sr.ht/~gary_moore/cpp-image-effects
+
+    # Cpp Image Effects
 
 In an effort to learn a bit more C++, I decided to write a few image effects. I'm using the [stb_image]() and [stb_image_write]() libraries to load and save images.
 
